@@ -1,33 +1,48 @@
 
 
-document.getElementById("registro2").addEventListener("submit", function(event) {
-  event.preventDefault();
-  
-  const nombre = document.getElementById("nombre").value.trim();
-  const boleta = document.getElementById("boleta").value.trim();
-  const contenedorResultado = document.getElementById("resultado");
-  const formulario = document.getElementById("registro2");
+const patrones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{2,60}$/,
+    boleta: /^\d{8}$/, 
+    fecha:  /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
 
- 
-  if (nombre === "" || boleta === "") {
-   
-    formulario.classList.add("error");
-    formulario.classList.remove("exito");
+}
 
-    contenedorResultado.className = "aviso error mostrar";
-    contenedorResultado.innerHTML = "Por favor, complete todos los campos obligatorios para continuar.";
-    return; 
-  }
+const mensajes = {
+    nombre: "El nombre debe contener solo letras y espacios, entre 2 y 60 caracteres.",
+    boleta: "La boleta debe contener exactamente 8 dígitos.",
+    fecha: "La fecha debe tener el formato dd/mm/yyyy y ser una fecha válida (ejemplo: 31/12/2020)."
+}
 
- 
-  formulario.classList.add("exito");
-  formulario.classList.remove("error");
+function validarCampo(campo, valor) {
+    return patrones[campo].test(valor);
+    
+}
 
-  contenedorResultado.className = "aviso exito mostrar";
-  contenedorResultado.innerHTML = `¡Registro exitoso! <strong>${nombre}</strong> (Boleta: ${boleta}) se ha registrado correctamente.`;
-  
-  console.log({ nombre, boleta });
 
-  // Limpiamos el formulario tras un registro exitoso
-  this.reset();
-});
+
+
+if (typeof document !== 'undefined') {
+    const formulario = document.getElementById('form-registro');
+
+    formulario.addEventListener('submit', (evento) => {
+        evento.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+        let formularioValido = true;
+
+        
+        for(const campo of Object.keys(patrones)){
+            const input = document.getElementById(campo);
+            const spanError = document.getElementById(`error-${campo}`);
+            const esValido = validarCampo(campo, input.value);
+
+            input.classList.toggle('invalido', !esValido);
+            spanError.textContent = esValido ? '' : mensajes[campo];
+            if(!esValido) formularioValido = false;
+        }
+
+        const mensajeExito = document.getElementById('mensaje-exito');
+        mensajeExito.textContent = formularioValido ? 'Registro exitoso!' : '';
+    });
+
+    
+}

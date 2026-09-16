@@ -10,20 +10,26 @@
   <link rel="stylesheet" href="./css/style2.css">
 </header>
  <main>
- <form class="formulario-registro" id="registro2"> 
+  <form class="formulario-registro" id="form-registro">
     <h1>Formulario de registro de asistencia</h1>
     
     <label for="nombre">Nombre completo:</label>
     <input type="text" id="nombre" name="nombre" required>
+    <span class="error" id="error-nombre"></span>
 
-    <label for="boleta">Boleta:</label>
+    <label for="boleta">boleta:</label>
     <input type="text" id="boleta" name="boleta" required>
-    
-    <button type="submit">Registrar asistencia</button>
+    <span class="error" id="error-boleta"></span>
 
-    <p id="resultado"></p>
+    <label for="fecha">Fecha de registro dia/mes/año</label>
+    <input type="text" id="fecha" name="fecha" placeholder="DD/MM/AAAA" required> 
+    <!-- 2. Cambia el id a 'error-fecha' para que coincida con la clave del script -->
+    <span class="error" id="error-fecha"></span>
+
+    <button type="submit">Registrar asistencia</button>
+    <p class="mensaje-exito" id="mensaje-exito"></p>
 </form>
- </main> 
+ </main>
  <script src="./java-script/script.js"></script>
 </body>
 </html>
