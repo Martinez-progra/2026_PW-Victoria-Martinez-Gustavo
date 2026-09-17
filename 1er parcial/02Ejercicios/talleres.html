@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicios con node</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <header>
+        <h1>Ejercicios con node</h1>
+    </header>
+    <main>
+        <section class="ejercicio">
+            <h2 id="titulo arreglos">Arreglos del codigo <code>01-arreglos.js</code></h2>
+        <p>Datos de prueba con js</p>
+        <div class="tabla-scroll">
+            <table id="tabla-talleres">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Instructor</th>
+                        <th>Cupo</th>
+                        <th>Inscritos</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <form id="form-arreglos" class="formulario"> 
+            <div class="campos">
+                <label for="operaciones-arreglo" name="operacion-arreglo">Operacion</label>
+                <select name="operacion-arreglo" id="operacion-arreglo">
+                    <option value="forEach">ForEach- lista simple</option>
+                    <option value="map">map - copia solo nombres</option>
+                    <option value="filter">filter filtrar talleres con cupo lleno</option>
+                    <option value="find">find buscar por el nombre del instructor</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <button type="submit">Ejecutar</button>
+        </form>
+
+    <output class="resultado" id="resultado-arreglo" for="form-arreglo"></output>
+        </section>
+    </main>
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
