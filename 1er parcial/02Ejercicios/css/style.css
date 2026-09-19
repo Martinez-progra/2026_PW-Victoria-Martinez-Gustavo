@@ -16,6 +16,7 @@ h1{
     color: #990099;
     padding: 20px;
     margin: 5%;
+    font-size: 350%;
 }
 
 h2{
@@ -46,7 +47,7 @@ tabla-scroll {
 }
 
 #tabla-talleres th {
-    background-color: #3b82f6; /* Azul moderno */
+    background-color: #990099; 
     color: #ffffff;
     padding: 12px 16px;
     font-weight: 600;
@@ -68,7 +69,7 @@ p{
 }
 
 button[type="submit"] {
-    background-color: #3b82f6;
+    background-color: #990099;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -80,7 +81,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #2563eb;
+    background-color: #990099;
 }
 
 resultado {
