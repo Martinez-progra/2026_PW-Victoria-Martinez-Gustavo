@@ -10,11 +10,6 @@ const talleres = [
 ];
 
 
-// TODO: find — encuentra el PRIMER taller impartido por 'Ing. María López'
-
-// TODO: reduce — calcula `totalInscritos`, la suma de inscritos de todos los talleres
-
-// TODO: filter + map encadenados — nombres de los talleres que SÍ tienen cupo disponible
 
 console.log("Aplicando un foreach para imprimir cada taller")
 talleres.forEach((t) => console.log(`-${t.nombre} (${t.inscritos}/${t.cupo})`))
@@ -35,7 +30,18 @@ console.log(llenos.map((t) => t.nombre))
 
 // TODO: find — encuentra el PRIMER taller impartido por 'Ing. María López'
 
+console.log("aplicando la funcion filder en los talleres")
+const encontrado = talleres.find((t) => t.inscritos >= t.cupo);
+console.log()
+
+
 // TODO: reduce — calcula `totalInscritos`, la suma de inscritos de todos los talleres
+console.log("aplicando la funcion reduce en los talleres")
+const totalInscritos = talleres.reduce((acumulador, t) => acumulador + t.inscritos, 0);
+console.log(totalInscritos);
 
 // TODO: filter + map encadenados — nombres de los talleres que SÍ tienen cupo disponible
 
+console.log("aplicando la funcion filter + map en los talleres")
+const nombresDisponibles = talleres.filter((t) => t.inscritos < t.cupo).map((t) => t.nombre);
+console.log(nombresDisponibles);

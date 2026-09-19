@@ -1,0 +1,91 @@
+body{
+    background-color: #CCCCFF;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0%;
+
+}
+
+header{
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+
+h1{   
+    color: #990099;
+    padding: 20px;
+    margin: 5%;
+}
+
+h2{
+    text-align: center;
+    font-size: 1.25rem;
+    color: #34495e;
+    margin-top: 0;
+
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+tabla-scroll {
+    overflow-x: auto;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+#tabla-talleres {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+#tabla-talleres th {
+    background-color: #3b82f6; /* Azul moderno */
+    color: #ffffff;
+    padding: 12px 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+#tabla-talleres td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #475569;
+}
+
+p{
+    text-align: center;
+    color:#34495e;
+    font-size: medium;
+}
+
+button[type="submit"] {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2563eb;
+}
+
+resultado {
+    display: block;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #1e293b;
+}
