@@ -39,29 +39,28 @@ formArreglos.addEventListener(`submit`, (evento) =>{
     let resultado = '';
 
     switch(operacion){
-        case `forEach`:
-            resultado = talleres.map((t) => `- ${t.nombre} (${t.inscritos}/${t.cupo})`).join(`\n`);
+        case 'forEach':
+            resultado = talleres.map((t) => `- ${t.nombre} (${t.inscritos}/${t.cupo})`).join('\n');
             pintarTabla(talleres);
             break;
 
         case 'map':
             const nombres = talleres.map((t) => t.nombre);
-            resultado = `\n` + nombres.join('\n');
+            resultado = '\n' + nombres.join('\n');
             pintarTabla(talleres);
             break;
 
         case 'filter':
             const llenos = talleres.filter((t) => t.inscritos >= t.cupo);
-            resultado = `\n` + 
-                        llenos.map((t) => `• ${t.nombre} (${t.inscritos}/${t.cupo})`).join('\n');
-            pintarTabla(llenos);
+            resultado = '\n' + llenos.map((t) => `• ${t.nombre} (${t.inscritos}/${t.cupo})`).join('\n');
+            pintarTabla(llenos); // Aquí sí filtra visualmente la tabla
             break;
 
         case 'find':
             const encontrado = talleres.find((t) => t.instructor === 'Ing. María López');
             if (encontrado) {
-                resultado = `-\nNombre: ${encontrado.nombre} | Instructor: ${encontrado.instructor}`;
-                pintarTabla(encontrado); 
+                resultado = resultado = `Taller encontrado:\nNombre: ${encontrado.nombre} | Instructor: ${encontrado.instructor}`;
+                pintarTabla([encontrado]); // CORREGIDO: Se pasa como arreglo [encontrado]
             } else {
                 resultado = "No se encontró ningún taller con ese criterio.";
                 pintarTabla([]);
@@ -78,66 +77,67 @@ formArreglos.addEventListener(`submit`, (evento) =>{
             const conCupo = talleres.filter((t) => t.inscritos < t.cupo);
             const nombresDisponibles = conCupo.map((t) => t.nombre);
             resultado = `\nTalleres con cupo disponible:\n- ${nombresDisponibles.join('\n- ')}`;
-            pintarTabla(conCupo);
+            pintarTabla(conCupo); // Filtra visualmente la tabla con los que tienen cupo
             break;
 
         default:
             pintarTabla(talleres);
             break;
     }
-
     resultadoArreglos.textContent = resultado;
 });
 
-const formObjeto = document.getElementById('form-objetos');
+
+const formObjeto = document.getElementById('form-objeto');
 const resultadoObjeto = document.getElementById('resultado-objeto');
 
-formObjeto .addEventListener('submit', (evento) =>{
+formObjeto.addEventListener('submit', (evento) => {
     evento.preventDefault();
 
     const taller = {
         nombre: document.getElementById('obj-nombre').value,
         instructor: document.getElementById('obj-instructor').value,
-        cupo: Number(document.getElementById('obj-cupo').value),
-        inscritos: Number(document.getElementById('obj-inscritos').value)
+        cupo: Number(document.getElementById('obj-cupo').value) || 0, // Validación básica por si está vacío
+        inscritos: Number(document.getElementById('obj-inscritos').value) || 0
     };
 
     const operacion = document.getElementById('operacion-objeto').value;
-    let resultado;
-    
+    let resultado = '';
 
     switch(operacion){
         case 'keys':
-            resultado = JSON.stringify(Object.keys(taller));
+            resultado = JSON.stringify(Object.keys(taller), null, 2);
             break;
 
-            case 'values':
-            resultado = JSON.values(Object.keys(taller));
-                break;
-
-            case 'entries':
-            resultado = JSON.entries(Object.keys(taller));    
-
+        case 'values':
+            resultado = JSON.stringify(Object.values(taller), null, 2);
             break;
 
-            case 'stringify':
-            const textoJson= JSON.stringify(taller, null, 2);
-            resultado = '${textoJson} \n \n tipo: ${typeof textoJson}';
-                break;
+        case 'entries':
+            resultado = JSON.stringify(Object.entries(taller), null, 2);    
+            break;
 
-                case 'roundtrip':
-                    const textoJsons = JSON.stringify(taller, null, 2);
-                    const objetoDevuelta = JSON.parse(textoJsons);
+        case 'stringify':
+            const textoJson = JSON.stringify(taller, null, 2);
+            resultado = `${textoJson} \n\n tipo: ${typeof textoJson}`;
+            break;
 
-                    resultado = [
-                        textoJsons,
-                        ' ',
-                        `tipo:${typeof objetoDevuelta}`,
-                        objetoDevuelta.nombre
-                    ].join('\n');
-                break;
+        case 'roundtrip':
+            const textoJsons = JSON.stringify(taller, null, 2);
+            const objetoDevuelta = JSON.parse(textoJsons);
+
+            resultado = [
+                textoJsons,
+                '',
+                `tipo: ${typeof objetoDevuelta}`,
+                `Nombre recuperado: ${objetoDevuelta.nombre}`
+            ].join('\n');
+            break;
+            
+        default:
+            resultado = "Operación no válida";
+            break;
     }
+    
     resultadoObjeto.textContent = resultado;
-
-})
-
+});

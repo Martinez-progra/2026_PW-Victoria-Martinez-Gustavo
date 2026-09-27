@@ -15,8 +15,7 @@ console.log("Aplicando un foreach para imprimir cada taller")
 talleres.forEach((t) => console.log(`-${t.nombre} (${t.inscritos}/${t.cupo})`))
 
 console.log("aplicando un forEach para talleres")
-talleres.forEach((t) => console.log(`- ${t.nombre} (${t.inscritos}/%{t.cupo})`));
- 
+talleres.forEach((t) => console.log(`- ${t.nombre} (${t.inscritos}/${t.cupo})`));
 // TODO: map — crea un arreglo `nombres` solo con los nombres de los talleres
  
 console.log("Aplicando un forEach para imprmir los talleres:");
@@ -31,8 +30,8 @@ console.log(llenos.map((t) => t.nombre))
 // TODO: find — encuentra el PRIMER taller impartido por 'Ing. María López'
 
 console.log("aplicando la funcion filder en los talleres")
-const encontrado = talleres.find((t) => t.inscritos >= t.cupo);
-console.log()
+const encontrado = talleres.find((t) => t.instructor === 'Ing. María López');
+console.log(encontrado);
 
 
 // TODO: reduce — calcula `totalInscritos`, la suma de inscritos de todos los talleres

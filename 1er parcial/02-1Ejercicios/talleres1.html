@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header>
+     <header>
         <h1>Ejercicios con node</h1>
     </header>
     <main>
@@ -31,9 +31,24 @@
 
         </div>
 
-       </section>
+        <form id="form-arreglos" class="formulario"> 
+            <div class="campos">
+                <label for="operaciones-arreglo" name="operacion-arreglo">Operacion</label>
+                <select name="operacion-arreglo" id="operacion-arreglo">
+                    <option value="forEach">ForEach- lista simple</option>
+                    <option value="map">map - copia solo nombres</option>
+                    <option value="filter">filter filtrar talleres con cupo lleno</option>
+                    <option value="find">find buscar por el nombre del instructor</option>
+                    <option value="reduce">Calcula los inscritos que se hayan inscrito</option>
+                    <option value="filter-map">Calcula cual de estas tendria </option>
+                </select>
+            </div>
+            <button type="submit">Ejecutar opción de arreglo</button>
+        </form>
 
-       <section class="ejercicio" aria-labelledby="titulo-objeto">
+    <output class="resultado" id="resultado-arreglo" for="form-arreglos"></output>
+        </section>
+
     <h2 id="titulo-objeto">Segunda parte de ejercicios: manejo de objetos y JSON</h2>
     <p>Edita el taller y elige la operación que deseas realizar:</p>
 
@@ -72,10 +87,12 @@
     <button type="submit">Ejecutar opción de objeto</button>
 </form>
 
-    <output class="resultado" id="resultado-objeto" for="form-Objeto"></output>
+    <output class="resultado" id="resultado-objeto" for="form-objeto"></output>
 </section>
     </main>
 
-    <script src="./js/app.js"></script>
+ <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L2BMw8YTC_Q?si=VIOY76-y5_TYIUdv&amp;start=24" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <script src="app1.js"></script>
+
 </body>
 </html>
