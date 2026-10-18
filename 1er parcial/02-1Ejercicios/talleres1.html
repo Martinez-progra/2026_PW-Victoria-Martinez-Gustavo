@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicios con node</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+     <header>
+        <h1>Ejercicios con node</h1>
+    </header>
+    <main>
+        <section class="ejercicio">
+            <h2 id="titulo arreglos">Arreglos del codigo <code>01-arreglos.js</code></h2>
+        <p>Datos de prueba con js</p>
+        <div class="tabla-scroll">
+            <table id="tabla-talleres">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Instructor</th>
+                        <th>Cupo</th>
+                        <th>Inscritos</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <form id="form-arreglos" class="formulario"> 
+            <div class="campos">
+                <label for="operaciones-arreglo" name="operacion-arreglo">Operacion</label>
+                <select name="operacion-arreglo" id="operacion-arreglo">
+                    <option value="forEach">ForEach- lista simple</option>
+                    <option value="map">map - copia solo nombres</option>
+                    <option value="filter">filter filtrar talleres con cupo lleno</option>
+                    <option value="find">find buscar por el nombre del instructor</option>
+                    <option value="reduce">Calcula los inscritos que se hayan inscrito</option>
+                    <option value="filter-map">Calcula cual de estas tendria </option>
+                </select>
+            </div>
+            <button type="submit">Ejecutar opción de arreglo</button>
+        </form>
+
+    <output class="resultado" id="resultado-arreglo" for="form-arreglos"></output>
+        </section>
+
+    <h2 id="titulo-objeto">Segunda parte de ejercicios: manejo de objetos y JSON</h2>
+    <p>Edita el taller y elige la operación que deseas realizar:</p>
+
+    <form class="formulario" id="form-objeto">
+    <div class="campo">
+        <label for="obj-nombre">Nombre</label>
+        <input type="text" id="obj-nombre" name="obj-nombre" value="Introducción a Python">
+    </div>
+
+    <div class="campo campo-corta">
+        <label for="obj-instructor">Instructor</label>
+        <input type="text" id="obj-instructor" name="obj-instructor" value="Ing. María López">
+    </div>
+
+    <div class="campo campo-corta">
+        <label for="obj-cupo">Cupo</label>
+        <input type="number" id="obj-cupo" name="obj-cupo" value="25">
+    </div>
+
+    <div class="campo campo-corta">
+        <label for="obj-inscritos">Inscritos</label>
+        <input type="number" id="obj-inscritos" name="obj-inscritos" value="25">
+    </div>
+
+    <div class="campo">
+        <label for="operacion-objeto">Operación a realizar</label>
+        <select name="operacion-objeto" id="operacion-objeto">
+            <option value="keys">Object.keys</option>
+            <option value="values">Object.values</option>
+            <option value="entries">Object.entries</option>
+            <option value="stringify">JSON.stringify</option>
+            <option value="roundtrip">Ida y vuelta de cadena a JSON</option>
+        </select>
+    </div>
+    
+    <button type="submit">Ejecutar opción de objeto</button>
+</form>
+
+    <output class="resultado" id="resultado-objeto" for="form-objeto"></output>
+</section>
+
+<section  class="ejercicio" aria-labelledby="titulo-texto" >
+            <h2 id="titulo-texto" > 3. Strings y fechas</h2>
+            <p>La fecha usa el mismo formato <strong>DD/MM/AAAA</strong> validado con regex</p>
+
+            <form class="formulario" id="form-texto">
+                <div class="campo" >
+                    <label for="nombre-entrada">Nombre (con espacios de sobre a proposito)</label>
+                    <input type="text" id="nombre-entrada" name="nombre-entrada" value="María López">
+                </div>
+                <div class="campo" >
+                    <label for="cupo-entrada">Cupo (Para el templete)</label>
+                    <input type="number" id="cupo-entrada" name="cupo-entrada" value="25" min="0">
+                </div>
+                <div class="campo" >
+                    <label for="fecha-entrada">Fecha de asistencia (DD/MM/AAAA)</label>
+                    <input type="text" id="fecha-entrada" name="fecha-entrada" value="05/09/2026>
+                    <span class="error"  id="error-fecha" > </span>
+                </div>
+                <button type="submit" >Ejecutar</button>
+            </form>
+            <output class="resultado" id="resultado-texto" for="form-texto" ></output>
+
+        </section>
+    </main>
+
+ <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L2BMw8YTC_Q?si=VIOY76-y5_TYIUdv&amp;start=24" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <script src="app1.js"></script>
+
+</body>
+</html>

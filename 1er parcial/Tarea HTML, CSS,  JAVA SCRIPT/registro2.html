@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header><a href="./detalle2.html"></a>
+  <link rel="stylesheet" href="./css/style2.css">
+</header>
+ <main>
+  <form class="formulario-registro" id="form-registro">
+    <h1>Formulario de registro de asistencia</h1>
+    
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <span class="error" id="error-nombre"></span>
+
+    <label for="boleta">boleta:</label>
+    <input type="text" id="boleta" name="boleta" required>
+    <span class="error" id="error-boleta"></span>
+
+    <label for="fecha">Fecha de registro dia/mes/año</label>
+    <input type="text" id="fecha" name="fecha" placeholder="DD/MM/AAAA" required> 
+    <!-- 2. Cambia el id a 'error-fecha' para que coincida con la clave del script -->
+    <span class="error" id="error-fecha"></span>
+
+    <button type="submit">Registrar asistencia</button>
+    <p class="mensaje-exito" id="mensaje-exito"></p>
+</form>
+ </main>
+ <script src="./java-script/script.js"></script>
+</body>
+</html>

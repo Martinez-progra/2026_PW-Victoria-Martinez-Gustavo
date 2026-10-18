@@ -1,0 +1,48 @@
+body{
+    background-color: #CCCCFF;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0%;
+}
+
+tabla-scroll {
+    overflow-x: auto;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid ;
+    background-color: #6c0c72;
+    
+}
+
+#tabla-talleres {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+    color: white;
+}
+
+#tabla-talleres th {
+    background-color: #6c0c72; 
+    color: white;
+    padding: 12px 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+#tabla-talleres td {
+    padding: 12px 16px;
+    border-bottom: 1px solid white;
+    color: black;
+}
+
+p{
+    font-size: 1.1rem;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
