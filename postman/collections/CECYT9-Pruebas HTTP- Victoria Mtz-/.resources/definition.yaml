@@ -1,0 +1,4 @@
+$kind: collection
+name: CECYT9-Pruebas HTTP- Victoria Mtz.
+variables:
+  baseUrl: ""

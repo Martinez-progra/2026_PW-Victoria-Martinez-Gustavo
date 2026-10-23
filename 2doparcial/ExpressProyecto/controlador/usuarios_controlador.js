@@ -30,3 +30,13 @@ async function obtenerUsuario(req, res) {
     }
 }
 
+const express = require('express');
+const router = express.Router(); // <--- 1. Debes crear el router
+
+// Aquí tus rutas (ejemplo):
+router.get('/', listarUsuarios);
+router.get('/:id', obtenerUsuario);
+
+
+module.exports = router;
+
