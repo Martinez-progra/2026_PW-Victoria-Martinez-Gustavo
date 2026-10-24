@@ -25,7 +25,7 @@ app.post('/eco', (req, res) => {
 
 
 
-const usuariosRutas = require('./controlador/usuarios_controlador');
+const usuariosRutas = require('./rutas/rutas_usuarios');
 app.use('/api/usuarios', usuariosRutas);
 
 
