@@ -1,20 +1,61 @@
-
 import Link from 'next/link';
+import estilos from '../styles/Dashboard.module.css';
 
+const modulos = [
+  {
+    titulo: 'Usuarios',
+    descripcion: 'Gestión de registros, alumnos y profesores.',
+    textoEnlace: 'Ir a Usuarios',
+    href: '/alumnos/perfil',
+    color: 'usuarios'
+  },
+  {
+    titulo: 'Talleres',
+    descripcion: 'Administración de cursos y cupos disponibles.',
+    textoEnlace: 'Ir a Talleres',
+    href: '/talleres',
+    color: 'talleres'
+  },
+  {
+    titulo: 'Asistencia',
+    descripcion: 'Control de asistencias por usuario y taller.',
+    textoEnlace: 'Ir a Asistencia',
+    href: '/talleres/alumnos/perfil',
+    color: 'asistencia'
+  }
+];
 
 export default function Home() {
   return (
-    <main style={{ padding: '40px', fontFamily: 'sans-serif' }}>
-      
-      <h1>Bienvenido a la Aplicación de Talleres</h1>
-      <p>Selecciona una opción para continuar:</p>
-      <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
-        <li style={{ marginBottom: '10px' }}>
-          <Link href="/talleres" style={{ color: 'blue', textDecoration: 'underline', fontSize: '18px' }}>
-            Ver Lista de Talleres →
-          </Link>
-        </li>
-      </ul>
+    <main className={estilos.contenedor}>
+      <header className={estilos.encabezado}>
+        <h1>Panel Principal del Sistema</h1>
+        <p>Bienvenido a la gestión de proyectos escolares.</p>
+      </header>
+
+      <section className={estilos.modulos}>
+        <h2>Módulos del Sistema</h2>
+        <p>Selecciona una sección:</p>
+
+        <div className={estilos.tarjetas}>
+          {modulos.map((modulo) => (
+            <article className={estilos.tarjeta} key={modulo.titulo}>
+              <h3>{modulo.titulo}</h3>
+              <p>{modulo.descripcion}</p>
+              <Link
+                className={`${estilos.boton} ${estilos[modulo.color]}`}
+                href={modulo.href}
+              >
+                {modulo.textoEnlace}
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer className={estilos.pie}>
+        Proyecto escolar - Arquitectura de Modelos y Controladores en Next.js
+      </footer>
     </main>
   );
 }
