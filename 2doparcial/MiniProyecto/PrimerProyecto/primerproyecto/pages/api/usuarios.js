@@ -1,5 +1,5 @@
 // pages/api/usuarios.js
-import { UserController } from "@/controllers/userController";
+import { UserController } from "../../controllers/userController";
 
 export default function handler(req, res) {
   const { method } = req;
