@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <nav className={estilos.navegacion} aria-label="Navegación principal">
         <Link href="/">Inicio</Link>
-        <Link href="/practica/1">Práctica</Link>
+        <Link href="/mini-servidor/1">Mini-servidor</Link>
         <Link href="/talleres">Talleres</Link>
         <Link href="/alumnos/perfil">Usuarios</Link>
         <Link href="/talleres/alumnos/perfil">Asistencia</Link>

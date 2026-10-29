@@ -94,7 +94,7 @@ export default function PerfilAlumno() {
     <>
       <nav>
         <Link href="/">Inicio</Link>
-        <Link href="/practica/1">Práctica /1</Link>
+        <Link href="/mini-servidor/1">Mini-servidor /1</Link>
         <Link href="/talleres">Talleres</Link>
         <Link href="/talleres/alumnos/perfil">Mi perfil</Link>
       </nav>
