@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Talleres disponibles</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <nav id="nav"></nav>
+  <main>
+    <a class="volver" href="/">← Volver al inicio</a>
+    <h1>Lista de Talleres Disponibles</h1>
+    <p id="error" class="error" hidden></p>
+    <input id="buscador" class="buscador" type="search"
+           placeholder="Buscar por nombre o instructor"
+           aria-label="Buscar talleres por nombre o instructor">
+    <div id="rejilla" class="rejilla"><p>Cargando talleres...</p></div>
+  </main>
+  <script src="/js/comun.js"></script>
+  <script src="/js/talleres.js"></script>
+</body>
+</html>

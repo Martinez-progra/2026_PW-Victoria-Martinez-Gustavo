@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil de Alumno</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <nav id="nav"></nav>
+  <main>
+    <a class="volver" href="/">← Volver al inicio</a>
+    <h1>Perfil de Alumno</h1>
+    <p>Consulta los talleres en los que estás inscrito ingresando tu número de boleta.</p>
+
+    <form id="form" class="formulario">
+      <input id="boleta" type="text" inputmode="numeric" maxlength="10"
+             placeholder="Número de boleta (10 dígitos)" aria-label="Número de boleta">
+      <button id="boton" type="submit">Consultar</button>
+    </form>
+    <p id="error" class="error" hidden></p>
+
+    <section class="panel">
+      <h2>Mis Talleres Inscritos</h2>
+      <div id="resultado"><p class="vacio">No hay talleres registrados para esta boleta.</p></div>
+    </section>
+  </main>
+  <script src="/js/comun.js"></script>
+  <script src="/js/usuarios.js"></script>
+</body>
+</html>
