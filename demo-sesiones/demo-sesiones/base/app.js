@@ -8,6 +8,106 @@ const { crearModeloUsuarios } = require('./modelos/usuarios.modelo');
 
 const NOMBRE_COOKIE = 'connect.sid';
 
+function todasLasSesiones(almacen){
+  return new Promise((resolve, reject) => {
+   const promesa = almacen.all ((error, sessiones)=> (error ? reject(error) : resolve(sessiones)));
+   if(promesa && typeof promesa.then === 'function')
+    promesa.then(resolve, reject);
+  });
+
+}
+const pendientes = (paso) => (req, res) => res.status(501).json({error: `501. Falta programar el ${paso}`});
+
+function crearApp(config, pool){
+  const app = express();
+  app.use(express.json());
+
+const usuarios = crearModeloUsuarios(pool);
+
+const almacen = config.almacen === 'memoria' ? new session.MemoryStore() :  new MySQLStore({createDatabaseTable: false, clearExpired: false},pool);
+app.locals.almace = almacen;
+
+app.use(
+  session({
+    name : NOMBRE_COOKIE,
+    //ES SECRETA? PUBLICA?
+    secret: process.env.SESSION_SECRET || 'secreto-solo-para-demo'
+
+  })
+)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Regresa todas las sesiones del almacén (MemoryStore usa callback; MySQLStore regresa una promesa).
 function todasLasSesiones(almacen) {
   return new Promise((resolve, reject) => {
