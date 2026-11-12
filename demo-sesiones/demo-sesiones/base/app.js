@@ -85,14 +85,14 @@ function requiereRol(rol){
 
 app.get('/api/config', (req,res) => res.config);
 
-app.post('api/visita', (req, res)=>{
+app.post('/api/visita', (req, res)=>{
   if(!req.session) return res.json({error: 'No tiene una sesion asociada'});
   req.session.visitas = (req.session.visitas || 0)+1;
   res.json({visitas: req.session.visitas, sesion: idCorto(req.sessionID)});
 
 });
 
-app.post('api/login', async(req, res, next)=>{
+app.post('/api/login', async(req, res, next)=>{
 try{
     const {usuario, contrasena} = req.body || {};
     const datos = await usuarios.verificar(usuario, contraseña);
@@ -100,9 +100,79 @@ if(!datos) return res.status(401).json({error: 'Usuario o contraseña incorrecto
 
 //debemos de saber la sesion
 const antes = req.session.visitas !== undefined ? idCorto(req.sessionID) : null;
+ const visitas = req.session.visitas || 0;
 
+ //Que vamos a gauradra?
+ const guardar = () =>{
+  req.session.usuario = datos;
+  req.session.visitas = visitas;
+  req.session.creada = Date.now();
+  req.session.ultimoUso = Date.now();
+  req.session.save((error)=>{
+
+  if(error) return next(error);
+  res.json({usuario: datos, sesionAntes : antes, sesionDespues : idCorto(req.sessionID)});
+
+ });
+
+};
+
+if(config.regenerarAlEntrar){
+  //Vamos a regenerar la sesion
+req.session.regenerate((error) => (error ? next(error): guardar()));
+}else{
+  guardar();
 }
-})
+}catch(error){
+  next(error);
+}
+});
+
+app.post('/api/logout', (req, res, next)=>{
+  req.session.destroy((error) =>{
+    res.cleanCookie(NOMBRE_COOKIE);
+    res.json({mensaje: 'SESION CERRADA'});
+
+  });
+
+});
+
+app.get('/api/sesion', requiereSesion, (req, res)=>{
+  const desde = config.rolling ? req.session.ultimoUso : req.session.creada;
+  res.json({
+    usuario: req.session.usuario,
+    sesion: idCorto(req.sessionID),
+    expiraEnSegundos: Math.max(0, Math.round((desde + config.maxAge - Date.now())/1000)),
+
+  });
+});
+
+app.get('/api/perfil', requiereSesion, (req, res)=>{
+  req.session.visitas = (req.session.visitas || 0)+ 1; 
+  res.json({mensaje: `Hola ${req.session.usuario.nombre}, rol ${req.session.usuario.rol}, visitas: ${req.session.visitas}`});
+
+});
+
+app.get('/api/admin/sesiones', async(req, res, next) => {
+  try{
+    const sesiones = await todasLasSesiones(almacen);
+    const lista = Object.entries(sesiones || {}).map(([id, s]) => ({
+      sesion: idCorto(id),
+      esLaTuya: id === req.sessionID,
+      usuario: s.usuario ? s.usuario.usuario : '(sin iniciar sesión)',
+      visitas: s.visitas || 0,
+      expira: s.cookie && s.cookie.expires,
+    }));
+    res.json({almacen: config.almacen, sesiones: lista});
+  }catch(error){
+   
+  }
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api', (req, res) => escape.status(404).json({error : 'RUTA NO ENCONTRADA'})
 
 
-
+//PRIMERA TAREA: DEBERAN DE DESARROLLAR UNA INFORGRAfia sobre el uso de jwt para el inicio de sesion para el dia domingo 15 de noviembre
+//segunda tarea: deberan de desarrollar la implementacion del codigo para realizar la autenticacion y pruebas de sesiones conforme el documento para el archivo demo.js se entrega en vivo en directo 
