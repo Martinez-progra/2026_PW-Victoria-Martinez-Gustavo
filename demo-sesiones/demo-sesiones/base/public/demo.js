@@ -1,6 +1,10 @@
 // La página solo hace fetch a la API. El navegador manda la cookie solo (misma página, mismo servidor).
 const $ = (id) => document.getElementById(id);
 
+
+// Función auxiliar para hacer fetch a la API y devolver status y datos por medio del archivo html (si los hay).
+
+
 async function llamar(metodo, url, cuerpo) {
   const opciones = { method: metodo, headers: {} };
   if (cuerpo) {
@@ -13,6 +17,9 @@ async function llamar(metodo, url, cuerpo) {
   return { status: respuesta.status, datos };
 }
 
+// Funcion para llamar a las calles de la API y anotar el resultado en la bitácora de la página. 
+// Se usa para todas las llamadas a la API desde el navegador de todos los datos necesarios.
+
 function anotar(metodo, url, status, datos) {
   const li = document.createElement('li');
   const clase = status < 300 ? 'ok' : status === 401 ? 'e401' : status === 403 ? 'e403' : 'error';
@@ -22,6 +29,10 @@ function anotar(metodo, url, status, datos) {
   li.appendChild(cuerpo);
   $('bitacora').prepend(li);
 }
+
+// Función para refrescar el estado de la sesión del usuario por medio de la API y mostrarlo en la página.
+//Mandando un error si el usuario no tiene una sesión activa o si la sesión ha caducado.
+
 
 async function refrescarEstado() {
   const { status, datos } = await llamar('GET', '/api/sesion');
@@ -35,6 +46,8 @@ async function refrescarEstado() {
   }
   $('cookie-js').textContent = document.cookie || '(vacío)';
 }
+// Función para refrescar la lista de sesiones activas en el servidor y mostrarla en la página.
+// en caso de que el usuario no tenga una sesión valida o si la sesión ha caducado, se mostrará un mensaje siendo es la tuya?.
 
 async function refrescarSesiones() {
   const { datos: respuesta } = await llamar('GET', '/api/diagnostico/sesiones');
@@ -44,6 +57,8 @@ async function refrescarSesiones() {
       ? 'En la MEMORIA del servidor: se borra al reiniciarlo.'
       : 'En MySQL, tabla sessions. En Workbench: SELECT * FROM demo_sesiones.sessions;';
   }
+
+  // Funcion para mostrar todas las listas de usuarios que tienen una sesión activa en el servidor y mostrarla en la página, mostrando un mensaje si el usuario no tiene una sesión activa o si la sesión ha caducado.
   const cuerpo = $('tabla-sesiones');
   cuerpo.innerHTML = '';
   if (!datos || datos.length === 0) {
@@ -62,6 +77,8 @@ async function refrescarSesiones() {
     cuerpo.appendChild(fila);
   }
 }
+
+// Función para refrescar todo: estado de la sesión y lista de sesiones activas en el servidor.
 
 async function refrescarTodo() {
   await refrescarEstado();
@@ -91,6 +108,11 @@ for (const boton of document.querySelectorAll('[data-url]')) {
 
 $('btn-refrescar').addEventListener('click', refrescarTodo);
 $('btn-sesiones').addEventListener('click', refrescarSesiones);
+
+//  Como paso principal: Al cargar la página, se refresca la configuración del servidor y el estado de la sesión del usuario.
+//Pasos exactos:
+// Se hace una llamada a la API por medio de la función get llamada llamar() para obtener la configuración del servidor y se muestra en la página. 
+// Luego se llama a la función refrescarTodo() para actualizar el estado de la sesión y la lista de sesiones activas en el servidor.
 
 llamar('GET', '/api/config').then(({ datos }) => {
   $('config').textContent = JSON.stringify(datos, null, 2);

@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:4600/api/perfil
+method: GET
+body:
+  type: json
+  content: ""
+order: 3000

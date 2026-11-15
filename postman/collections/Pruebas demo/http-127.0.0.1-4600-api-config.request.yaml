@@ -1,0 +1,6 @@
+$kind: http-request
+name: http://127.0.0.1:4600/api/config
+description: ""
+url: http://127.0.0.1:4600/api/config
+method: GET
+order: 2000

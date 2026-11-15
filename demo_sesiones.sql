@@ -6,6 +6,9 @@
 -- OJO: borra la base "demo_sesiones" si ya existía.
 -- Si en tu .env usas otro DB_NAME, cambia "demo_sesiones" en las 3 líneas de abajo.
 
+CREATE DATABASE IF NOT EXISTS demo_sesiones;
+USE demo_sesiones;
+
 SET NAMES utf8mb4;
 DROP DATABASE IF EXISTS demo_sesiones;
 CREATE DATABASE demo_sesiones CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
