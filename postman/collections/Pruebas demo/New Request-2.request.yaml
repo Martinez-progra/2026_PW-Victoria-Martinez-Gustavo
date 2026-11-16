@@ -1,5 +1,5 @@
 $kind: http-request
 name: New Request
-url: ""
+url: http://127.0.0.1:4600/api/login
 method: GET
 order: 5000

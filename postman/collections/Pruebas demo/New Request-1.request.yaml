@@ -1,14 +1,8 @@
 $kind: http-request
 name: New Request
-url: http://127.0.0.1:4600/api/login
-method: POST
+url: http://127.0.0.1:4600/api/perfil
+method: GET
 body:
   type: json
-  content: "{\r
-
-    \  \"usuario\": \"ana\",\r
-
-    \  \"contrasena\": \"ana12345\"\r
-
-    }"
+  content: ""
 order: 4000

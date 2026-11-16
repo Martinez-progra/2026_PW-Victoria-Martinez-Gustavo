@@ -1,0 +1,5 @@
+$kind: http-request
+name: New Request
+url: http://127.0.0.1:4600/api/login
+method: POST
+order: 9000

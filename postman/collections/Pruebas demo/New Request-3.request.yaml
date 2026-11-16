@@ -1,5 +1,5 @@
 $kind: http-request
 name: New Request
-url: ""
-method: GET
+url: http://127.0.0.1:4600/api/logout
+method: POST
 order: 6000

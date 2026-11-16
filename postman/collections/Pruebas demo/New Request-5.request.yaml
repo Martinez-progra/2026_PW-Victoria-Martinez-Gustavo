@@ -1,0 +1,10 @@
+$kind: http-request
+name: New Request
+url: http://127.0.0.1:4600/api/perfil
+method: GET
+headers:
+  Cookie: connect.sid=s%3A-H8vpQ3JJQNpZYJOYvjHVlEIL0azG1-i.Az5rxgJvD2PSFy1DX9FuXeXGDeibB1AYTIJ%2BNKEJkPY; Path=/; Expires=Sun, 15 Nov 2026 21:48:59 GMT; SameSite=Lax
+body:
+  type: json
+  content: ""
+order: 8000
