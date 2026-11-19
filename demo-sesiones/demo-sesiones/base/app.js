@@ -54,17 +54,17 @@ function crearApp(config, pool) {
       return res.status(401).json({ error: '401 No has iniciado sesión con la cuenta correcta.' });
     }
 
-    // Si rolling está activo, actualizamos el último uso de inmediato para extender la sesión
-    if (config.rolling) {
-      req.session.ultimoUso = Date.now();
-    }
-
-    // Verificamos si ya expiró basado en el origen correcto
+    // Verificamos si ya expiró antes de actualizar el último uso
     if (vencida(req.session)) {
       return req.session.destroy(() => {
         res.clearCookie(NOMBRE_COOKIE);
         res.status(401).json({ error: '401 · Tu sesión venció: vuelve a iniciar sesión' });
       });
+    }
+
+    // Solo una sesión vigente puede extender su expiración por actividad
+    if (config.rolling) {
+      req.session.ultimoUso = Date.now();
     }
 
     next();
