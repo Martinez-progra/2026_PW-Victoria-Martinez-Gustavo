@@ -3,6 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const { crearModeloUsuarios } = require('./modelos/usuarios.modelo');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const {crearModeloTokens} = require('/modelos/tokens.modelo');
 
 const NOMBRE_COOKIE = 'connect.sid';
 
@@ -163,7 +166,86 @@ function crearApp(config, pool) {
     res.status(500).json({ error: 'Error en el servidor' });
   });
 
+  //Nuevo
+
+  const SECRETO_JWT = config.jwtSecreto || process.env.JWT_SECRET || 'secreto-jwt-solo-para-esta-demo';
+
+ function firmarToken(usuario){
+  return jwt.sign(
+    {
+      sub: String(usuario.id), usuario: usuario, nombre:
+      usuario.nombre, rol: usuario.rol
+    }, SECRETO_JWT,
+    {
+      algorithm: 'HS256', expiresIn: config.jwtEspiraSeg, jwtid: crypto.randomUUID()
+    }
+  );
+ }
+
+ async function requireJWT(req, res, next){
+  const encabezado = req.headers.authorization || '';
+  if(!encabezado.startWith('Bearer')){
+    return res.status(401).json({error: '401: Falta el token'});
+  }
+  const token = encabezado.slice('Bearer'.length);
+  let datos;
+  try{
+    datos = jwt.verify(token, SECRETO_JWT, {algorithms:['HS256']});
+  }catch(error){
+    if(error.name === 'TokenExpiredError'){
+    return res.status(401).json({error: '401 Token expirado, por favor renuevelo'});
+    }
+    return res.status(401).json({error: '401, Expirado'});
+  }
+
+  try{
+    if(config.jwtRevocar && (await crearModeloTokens.estaRevocado(datos.jti))){
+      return res.status(401).json({error: '401 Token revocadoy ya peto la sesion'});
+    }
+  }catch(error){
+    return next(error);
+  }
+
+  req.jwt = datos;
+  next();
+
+ }
+
+ function requiereRolJWT(rol){
+  return (req, res, next) => {
+    if(req.jwt.rol !== rol){
+      return res.status(403).json({error: `403 Eres ${req.jwt.usuario}, pero esta ruta le pertenece a ${rol}`});
+
+    }
+  }
+ }
+ //esto ya es para que implementen en las rutas
+
+ app.post('api/jwt/login', async(req, res, next) => {
+  try{
+    const {usuario, contrasena} = req.body || '';
+    const datos = await usuarios.verificar(usuario,contrasena);
+    if(!datos) return res.status(401).json({error: 'Usuario o contrasena incorrecto'});
+
+    res.json({token: firmarToken(datos), usuario:datos});
+  }catch{
+    next(error);
+  }
+
+  app.get('/api/jwt/perfil', requiereRolJWT, (req, res) => {
+    res.json({
+      mensaje: `Hola: ${req.jwt.nombre}`, }
+      rol :  req.jwt.rol,
+      expiraEnSegundos : match.max(0, req.jwt.exp - Math.floor(Date.now() / 1000)),
+    });
+
+  app.get('api/jwt/admin/reporte', requiereRolJWT, requiereRol('admin'), (req, res))
+
+  });
+ })
   return app;
 }
+
+
 
 module.exports = { crearApp, NOMBRE_COOKIE };

@@ -22,6 +22,18 @@ module.exports = {
   // true: al iniciar sesión el servidor cambia el id de la sesión (protege contra la fijación de sesión).
   regenerarAlEntrar: true,
 
+  //para el JWT las siguientes variables
+
+  //Todo token debe tener una expiracion en minisegundos
+
+  jwtExpiraSeg = 5*60,
+
+  //true or false, para que cuando el token revoque no se pueda volver a utilizar para ello vamos a generar una lista de tokens revocados
+
+  jwtRevocar : true,
+
+  
+
  
 
     
